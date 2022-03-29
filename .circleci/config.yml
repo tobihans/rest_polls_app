@@ -10,13 +10,11 @@ jobs:
           name: install dependencies
           command: |
             pip install --user poetry
-            ls
             poetry install
       - run:
           name: run tests
           command: |
-            poetry shell
-            ./manage.py test
+            poetry run ./manage.py test
 
 
 workflows:
