@@ -1,0 +1,28 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/python:3.10.2
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            pip install --user poetry
+            cd rest_polls_app
+            poetry install
+      - run:
+          name: run tests
+          command: |
+            poetry shell
+            cd rest_polls_app
+            ./manage.py test
+
+
+workflows:
+  ci:
+    jobs:
+      - build-and-test
+
